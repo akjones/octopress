@@ -5,9 +5,9 @@ require "fog"
 
 ## -- Amazon S3 deploy config -- ##
 
-s3_bucket     = "www.andrewreid.me"
-s3_access_key = "AKIAINFN5CMVV5UKIMLA"
-s3_secret_key = "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"
+s3_bucket     = "www.andrewjones.id.au"
+s3_access_key = ""
+s3_secret_key = ""
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
