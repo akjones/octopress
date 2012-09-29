@@ -256,7 +256,7 @@ task :s3 do
     :aws_secret_access_key  => s3_secret_key,
     :aws_access_key_id      => s3_access_key
   )
-  
+
   ## Traverse public directory, build a hash
   Dir.chdir("public") do
     published_files = FileList['**/*'].inject({}) do |hsh, path|
@@ -267,9 +267,9 @@ task :s3 do
       end
     end
     raise "public is empty: aborting" if published_files.size <= 1
-    
+
     bucket = connection.directories.get(s3_bucket)
-    
+
     published_files.each do |file, etag|
       case etag
       when :directory
@@ -289,9 +289,9 @@ task :s3 do
         end
       end
     end
-    
+
     ## Clean up removed files
-    
+
     bucket.files.each do |object|
       unless published_files.has_key? object.key
         puts "Removing #{object.key} (no longer exists)"
@@ -360,7 +360,7 @@ task :setup_github_pages, :repo do |t, args|
   if args.repo
     repo_url = args.repo
   else
-    puts "Enter the read/write url for your repository" 
+    puts "Enter the read/write url for your repository"
     puts "(For example, 'git@github.com:your_username/your_username.github.com)"
     repo_url = get_stdin("Repository url: ")
   end
