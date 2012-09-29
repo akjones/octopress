@@ -6,7 +6,7 @@ require "yaml"
 
 ## -- Amazon S3 deploy config -- ##
 
-s3_bucket     = "www.andrewjones.id.au"
+s3_bucket     = "www.andrewjones.id.au.s3-ap-southeast-1.amazonaws.com"
 s3_access_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['access_key_id']
 s3_secret_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['secret_access_key']
 
