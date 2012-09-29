@@ -6,7 +6,8 @@ require "yaml"
 
 ## -- Amazon S3 deploy config -- ##
 
-s3_bucket     = "www.andrewjones.id.au.s3-ap-southeast-1.amazonaws.com"
+s3_region     = 'ap-southeast-1'
+s3_bucket     = 'www.andrewjones.id.au'
 s3_access_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['access_key_id']
 s3_secret_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['secret_access_key']
 
@@ -253,6 +254,7 @@ task :s3 do
   ## Connection to S3
   connection = Fog::Storage.new(
     :provider               => "AWS",
+    :region                 => s3_region,
     :aws_secret_access_key  => s3_secret_key,
     :aws_access_key_id      => s3_access_key
   )
@@ -268,7 +270,7 @@ task :s3 do
     end
     raise "public is empty: aborting" if published_files.size <= 1
 
-    bucket = connection.directories.get(s3_bucket)
+    bucket = connection.directories.find { |b| b.key == s3_bucket }
 
     published_files.each do |file, etag|
       case etag
