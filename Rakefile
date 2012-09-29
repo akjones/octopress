@@ -2,12 +2,13 @@ require "rubygems"
 require "bundler/setup"
 require "stringex"
 require "fog"
+require "yaml"
 
 ## -- Amazon S3 deploy config -- ##
 
 s3_bucket     = "www.andrewjones.id.au"
-s3_access_key = ""
-s3_secret_key = ""
+s3_access_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['access_key_id']
+s3_secret_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.yml'))['secret_access_key']
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
