@@ -16,7 +16,7 @@ s3_secret_key = YAML.load_file(File.join(File.dirname(__FILE__), 'credentials.ym
 ssh_user       = "user@domain.com"
 ssh_port       = "22"
 document_root  = "~/website.com/"
-rsync_delete   = true
+rsync_delete   = false
 deploy_default = "rsync"
 
 # This will be configured for you when you run config_deploy
