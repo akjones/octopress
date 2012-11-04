@@ -283,11 +283,21 @@ task :s3 do
             puts "Skipping #{file} (identical)"
           else
             "Updating #{file}"
-            bucket.files.create(:key => file, :public => true, :body => File.open(file))
+            bucket.files.create({
+              :key => file,
+              :public => true,
+              :body => File.open(file),
+              :metadata => {'Cache-Control' => 'max-age=3600'}
+            })
           end
         else
           puts "Uploading #{file}"
-          bucket.files.create(:key => file, :public => true, :body => File.open(file))
+          bucket.files.create({
+              :key => file,
+              :public => true,
+              :body => File.open(file),
+              :metadata => {'Cache-Control' => 'max-age=3600'}
+          })
         end
       end
     end
